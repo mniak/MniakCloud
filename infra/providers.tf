@@ -5,6 +5,12 @@ terraform {
       version = "4.100.0"
     }
   }
+  cloud {
+    organization = "mniak"
+    workspaces {
+      name = "MniakCloud"
+    }
+  }
 }
 
 provider "oci" {
