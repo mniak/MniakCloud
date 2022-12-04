@@ -5,11 +5,11 @@ terraform {
       version = "4.100.0"
     }
   }
-  cloud {
-    organization = "mniak"
-    workspaces {
-      name = "MniakCloud"
-    }
+  backend "s3" {
+    bucket         = "mniak"
+    key            = "cloud/terraform.tfstate"
+    region         = "sa-east-1"
+    dynamodb_table = "MniakCloud-TerraformLock"
   }
 }
 
