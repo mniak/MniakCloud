@@ -8,7 +8,7 @@ resource "oci_core_instance" "MainServer" {
     ocpus         = "16"
   }
   create_vnic_details {
-    subnet_id = oci_core_subnet.Main.id
+    subnet_id        = oci_core_subnet.Main.id
     assign_public_ip = oci_core_public_ip.Main.ip_address
   }
   source_details {
@@ -18,10 +18,15 @@ resource "oci_core_instance" "MainServer" {
     source_id   = "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaa3qj5t6lciltgvztum7sgkp6gxb2ln4bkpraugvqvgvmt2cxh337a"
   }
   metadata = {
-    "ssh_authorized_keys" = ""
-    "user_data"           = base64encode(<<-EOT
-    #include
-    https://gist.githubusercontent.com/mniak/b5cea0341be6e289b74ae8ed83073b91/raw/anyOS-script-setup-k3os.yaml
+    "user_data" = base64encode(<<EOT
+    #cloud-config
+users:
+  - name: andre
+    passwd: "$6$rounds=4096$U2FMYkUSs1rpjI8W$2xPyE8iUwABiOyZxAJBCW4Mq4MxwKr5GFnkVCpD0omF6SEIorej9aUjyyZk8NnFNBAIBMPmgXble601.cTJhK/"
+    ssh_import_id:
+      - gh:mniak
+    lock_passwd: true
+    sudo: ALL=(ALL:ALL) ALL
     EOT
     )
   }
