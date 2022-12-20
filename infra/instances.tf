@@ -27,6 +27,14 @@ users:
       - gh:mniak
     lock_passwd: true
     sudo: ALL=(ALL:ALL) ALL
+packages:
+  - mosh
+  - wireguard
+write_files:
+  - path: /etc/wireguard/wg0.conf
+    content: |
+      [Interface]
+      Address = 10.1.0.1/24
     EOT
     )
   }
