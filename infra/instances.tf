@@ -10,6 +10,7 @@ resource "oci_core_instance" "MainServer" {
   create_vnic_details {
     subnet_id        = oci_core_subnet.Main.id
     assign_public_ip = false
+    private_ip = oci_core_private_ip.MainServer.id
   }
   source_details {
     // Canonical-Ubuntu-22.04-Minimal-aarch64-2022.11.05-0
