@@ -1,0 +1,18 @@
+#!/bin/bash
+
+ISOURL=https://github.com/rancher/k3os/releases/download/v0.22.2-k3s2r0/k3os-arm64.iso
+CLOUDINITURL=https://gist.githubusercontent.com/mniak/b5cea0341be6e289b74ae8ed83073b91/raw/k3os-cloud-init.yaml
+K3OSSCRIPTURL=https://raw.githubusercontent.com/rancher/k3os/master/install.sh
+
+# Download cloud-init file
+curl -o cloud-init.yaml $CLOUDINITURL
+
+# Download k3os install script
+curl -o install.sh $K3OSSCRIPTURL
+chmod +x install.sh
+
+# Download ISO url
+curl -o k3os.iso $ISOURL
+
+# Execute k3os install script
+./install.sh --takeover --debug --tty ttyS0 --config cloud-init.yaml --no-format /dev/sda1 k3os.iso

@@ -18,6 +18,6 @@ resource "oci_core_instance" "MainServer" {
     source_id   = "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaa3qj5t6lciltgvztum7sgkp6gxb2ln4bkpraugvqvgvmt2cxh337a"
   }
   metadata = {
-    "user_data" = base64encode(file("cloud-init-user-data.yaml"))
+    "user_data" = base64encode(file("cloud-init.yaml"))
   }
 }
