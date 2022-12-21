@@ -1,0 +1,18 @@
+#cloud-config
+# users:
+#   - name: andre
+#     passwd: "$6$rounds=4096$U2FMYkUSs1rpjI8W$2xPyE8iUwABiOyZxAJBCW4Mq4MxwKr5GFnkVCpD0omF6SEIorej9aUjyyZk8NnFNBAIBMPmgXble601.cTJhK/"
+#     ssh_import_id:
+#       - gh:mniak
+#     lock_passwd: true
+#     sudo: ALL=(ALL:ALL) ALL
+# packages:
+#   - mosh
+#   - wireguard
+# write_files:
+#   - path: /etc/wireguard/wg0.conf
+#     content: |
+#       [Interface]
+#       Address = 10.1.0.1/24
+runcmd:
+  - echo 'Hello, World!' > /var/tmp/hello-world.txt

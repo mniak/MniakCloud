@@ -10,7 +10,6 @@ resource "oci_core_instance" "MainServer" {
   create_vnic_details {
     subnet_id        = oci_core_subnet.Main.id
     assign_public_ip = false
-    private_ip = oci_core_private_ip.MainServer.id
   }
   source_details {
     // Canonical-Ubuntu-22.04-Minimal-aarch64-2022.11.05-0
@@ -19,24 +18,6 @@ resource "oci_core_instance" "MainServer" {
     source_id   = "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaa3qj5t6lciltgvztum7sgkp6gxb2ln4bkpraugvqvgvmt2cxh337a"
   }
   metadata = {
-    "user_data" = base64encode(<<EOT
-    #cloud-config
-users:
-  - name: andre
-    passwd: "$6$rounds=4096$U2FMYkUSs1rpjI8W$2xPyE8iUwABiOyZxAJBCW4Mq4MxwKr5GFnkVCpD0omF6SEIorej9aUjyyZk8NnFNBAIBMPmgXble601.cTJhK/"
-    ssh_import_id:
-      - gh:mniak
-    lock_passwd: true
-    sudo: ALL=(ALL:ALL) ALL
-packages:
-  - mosh
-  - wireguard
-write_files:
-  - path: /etc/wireguard/wg0.conf
-    content: |
-      [Interface]
-      Address = 10.1.0.1/24
-    EOT
-    )
+    "user_data" = base64encode(file("cloud-init-user-data.yaml"))
   }
 }
