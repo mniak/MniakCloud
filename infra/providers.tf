@@ -15,7 +15,7 @@ terraform {
 
 provider "oci" {
   tenancy_ocid        = "mniak"
-  auth                = "SecurityToken"
+  auth                = "InstancePrincipal"
   config_file_profile = "DEFAULT"
   region              = var.region
 }
