@@ -1,6 +1,6 @@
-resource "google_compute_instance" "vm" {
+resource "google_compute_instance" "CloudServer" {
   provider     = google-beta
-  name         = "vm"
+  name         = "cloud-server"
   machine_type = "e2-micro"
 
   boot_disk {
@@ -11,5 +11,12 @@ resource "google_compute_instance" "vm" {
 
   network_interface {
     network = "default"
+    access_config {
+      nat_ip = google_compute_address.External.address
+    }
+  }
+
+  metadata = {
+    "user-data" = file("google-cloud/cloud-init.yaml")
   }
 }

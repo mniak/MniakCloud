@@ -1,5 +1,6 @@
 #cloud-config
 users:
+  - default
   - name: andre
     groups: [docker, sudo]
     ssh_import_id:
