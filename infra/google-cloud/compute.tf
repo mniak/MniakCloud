@@ -10,9 +10,11 @@ resource "google_compute_instance" "CloudServer" {
   }
 
   network_interface {
-    network = "default"
+    subnetwork = google_compute_subnetwork.MainSubNetwork.self_link
+    stack_type = "IPV4_IPV6"
     access_config {
-      nat_ip = google_compute_address.External.address
+      nat_ip       = google_compute_address.External.address
+      network_tier = "STANDARD"
     }
   }
 
@@ -20,3 +22,5 @@ resource "google_compute_instance" "CloudServer" {
     "user-data" = file("google-cloud/cloud-init.yaml")
   }
 }
+
+
