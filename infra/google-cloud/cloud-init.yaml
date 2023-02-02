@@ -8,4 +8,10 @@ users:
     hashed_passwd: "$6$rounds=4096$N1Vwy0EzjI.7Kb7p$SVTLeUDBsGz5mXPJugat5WeZB8KWxvQXbKZV6rLpqWOuR0HOaTqn/sBLY6.IwjTZj0ui1dtFwfhOPS354xNrS1"
     lock_passwd: false
     shell: /usr/bin/bash
+
 ssh_pwauth: false
+
+packages:
+  - mosh
+  - socat
+  - ufw
