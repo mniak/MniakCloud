@@ -15,3 +15,7 @@ packages:
   - mosh
   - socat
   - ufw
+  - haproxy
+  - iputils-ping
+  - dnsutils
+
