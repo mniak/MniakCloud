@@ -7,11 +7,11 @@ variable "ProjectName" {
 variable "Region" {
   description = "The region to use"
   type        = string
-  default     = "me-west1"
+  default     = "us-east1"
 }
 
 variable "Zone" {
   description = "The zone to use"
   type        = string
-  default     = "me-west1-c"
+  default     = "us-east1-d"
 }
