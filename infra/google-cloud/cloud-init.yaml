@@ -13,9 +13,24 @@ ssh_pwauth: false
 
 packages:
   - mosh
-  - socat
-  - ufw
   - haproxy
-  - iputils-ping
-  - dnsutils
 
+write_files:
+  - path: /etc/haproxy/haproxy.cfg
+    permissions: '0644'
+    content: |
+      defaults
+              mode tcp
+
+      frontend https
+              bind :80
+              bind :443
+              bind :7777
+              bind :8096
+              default_backend mniaklab
+
+      backend mniaklab
+              server lab [2804:14d:3280:4aef:817:31a6:40e5:da99]
+
+runcmd:
+  - systemctl restart haproxy
